@@ -87,10 +87,19 @@ Geplante nächste Schritte:
 
 ### 🔍 Filter- und Suchfunktion (Neu!) (15.02.2026)
 
-Die API unterstützt jetzt das Filtern und Suchen von Tieren über URL-Parameter:
+Die API wurde am 15.02.2026 um leistungsstarke Funktionen erweitert:
 
-* **Nach Status filtern:** `GET /api/animals/?status=Available`
-    *(Verfügbare Werte: Available, Reserved, Adopted)*
-* **Nach Namen suchen:** `GET /api/animals/?search=Almond`
-    *(Findet alle Tiere, deren Name die eingegebene Zeichenfolge enthält)*
-* **Kombinierte Suche:** `GET /api/animals/?status=Available&search=Jo`
+* **Nach Status filtern:** `GET /api/animals/?status=Available` (Verfügbare Werte: Available, Reserved, Adopted)
+* **Nach Namen suchen:** `GET /api/animals/?search=Almond` (Findet alle Tiere, deren Name die Zeichenfolge enthält)
+* **Pagination:** Die Ergebnisse werden nun in Seiten unterteilt (6 Tiere pro Seite), um die Ladezeiten zu optimieren. 
+  * Beispiel: `GET /api/animals/?page=2`
+---
+📌 Projektstatus
+
+- [x] Backend v0.1 abgeschlossen
+- [x] Filter- und Suchfunktion
+- [x] Pagination
+- [ ] Adoptions-Workflow
+- [ ] Angular-Frontend-Integration
+- [ ] JWT-Authentifizierung
+- [ ] Deployment
