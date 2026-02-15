@@ -83,4 +83,14 @@ Geplante nächste Schritte:
 - Pagination  
 - Angular-Frontend-Integration  
 - JWT-Authentifizierung  
-- Deployment  
+- Deployment
+
+### 🔍 Filter- und Suchfunktion (Neu!) (15.02.2026)
+
+Die API unterstützt jetzt das Filtern und Suchen von Tieren über URL-Parameter:
+
+* **Nach Status filtern:** `GET /api/animals/?status=Available`
+    *(Verfügbare Werte: Available, Reserved, Adopted)*
+* **Nach Namen suchen:** `GET /api/animals/?search=Almond`
+    *(Findet alle Tiere, deren Name die eingegebene Zeichenfolge enthält)*
+* **Kombinierte Suche:** `GET /api/animals/?status=Available&search=Jo`
