@@ -4,6 +4,11 @@ AnimalCare ist ein RESTful Backend-System für eine Tierarzt- und Tiervermittlun
 
 Dieses Projekt entstand im Rahmen meiner IT-Umschulung und dient dazu, meine Backend-Entwicklungsfähigkeiten zu vertiefen sowie eine strukturierte, realitätsnahe Adoptionsverwaltung zu simulieren.
 
+## ❤️ Motivation
+
+Dieses Projekt ist persönlich inspiriert von meinen vier geliebten Hunden — Almond, Joghurt, Taohoo und Kiekie.
+
+Es verbindet persönliche Motivation mit strukturierter Backend-Entwicklungspraxis.
 ---
 
 ## 🚀 Funktionen
@@ -64,14 +69,6 @@ IsAuthenticatedOrReadOnly
 
 ---
 
-## ❤️ Motivation
-
-Dieses Projekt ist persönlich inspiriert von meinen vier geliebten Hunden — Almond, Joghurt, Taohoo und Kiekie.
-
-Es verbindet persönliche Motivation mit strukturierter Backend-Entwicklungspraxis.
-
----
-
 ## 📌 Projektstatus
 
 Backend v0.1 abgeschlossen
@@ -91,15 +88,22 @@ Die API wurde am 15.02.2026 um leistungsstarke Funktionen erweitert:
 
 * **Nach Status filtern:** `GET /api/animals/?status=Available` (Verfügbare Werte: Available, Reserved, Adopted)
 * **Nach Namen suchen:** `GET /api/animals/?search=Almond` (Findet alle Tiere, deren Name die Zeichenfolge enthält)
-* **Pagination:** Die Ergebnisse werden nun in Seiten unterteilt (6 Tiere pro Seite), um die Ladezeiten zu optimieren. 
+* **Pagination:** Die Ergebnisse werden nun in Seiten unterteilt (6 Tiere pro Seite), um die Ladezeiten zu optimieren.  
   * Beispiel: `GET /api/animals/?page=2`
+ 
+ 🔐 JWT-Authentifizierung (Neu!) (15.02.2026)
+
+Das System nutzt nun JSON Web Tokens (JWT) für eine sichere Authentifizierung:
+* **Token abrufen:** `POST /api/token/` (Benutzername & Passwort senden)
+* **Token erneuern:** `GET /api/token/refresh/`
+* Diese Funktion ermöglicht es dem Angular-Frontend, Benutzer sicher anzumelden.
 ---
 📌 Projektstatus
 
 - [x] Backend v0.1 abgeschlossen
 - [x] Filter- und Suchfunktion
 - [x] Pagination
+- [x] JWT-Authentifizierung
 - [ ] Adoptions-Workflow
 - [ ] Angular-Frontend-Integration
-- [ ] JWT-Authentifizierung
 - [ ] Deployment
