@@ -1,12 +1,20 @@
-# animals/views.py
 from rest_framework import viewsets, permissions
-from .models import Animal  # <--- เพิ่มบรรทัดนี้!!!
+from .models import Animal
 from .serializers import AnimalSerializer
 
 
 class AnimalViewSet(viewsets.ModelViewSet):
-    queryset = Animal.objects.all().order_by("-created_at")
     serializer_class = AnimalSerializer
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly
-    ]  # แนะนำตัวนี้ถ้าจะเอา "อ่านได้แต่ห้ามแก้"
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        queryset = Animal.objects.all().order_by("-created_at")
+        status = self.request.query_params.get("status")
+        search = self.request.query_params.get("search")
+
+        if status:
+            queryset = queryset.filter(status=status)
+        if search:
+            queryset = queryset.filter(name__icontains=search)
+
+        return queryset
