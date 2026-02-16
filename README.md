@@ -113,6 +113,7 @@ Das System nutzt nun JSON Web Tokens (JWT) für eine sichere Authentifizierung:
 - [x] Filter- und Suchfunktion
 - [x] Pagination
 - [x] JWT-Authentifizierung
+- [x] User-Animal Relationship
 - [ ] Adoptions-Workflow
 - [ ] Angular-Frontend-Integration
 - [ ] Deployment
