@@ -98,6 +98,15 @@ Das System nutzt nun JSON Web Tokens (JWT) für eine sichere Authentifizierung:
 * **Token erneuern:** `GET /api/token/refresh/`
 * Diese Funktion ermöglicht es dem Angular-Frontend, Benutzer sicher anzumelden.
 ---
+
+👥 User-Animal Relationship (Neu!) (16.02.2026)
+
+* **Owner-Verknüpfung:** Jedes Tier ist nun fest mit einem Benutzer (Owner) verknüpft.
+* **Datenintegrität:** Durch `on_delete=models.CASCADE` werden Tierdaten automatisch bereinigt, wenn ein Benutzer gelöscht wird.
+* **Vorbereitung für Angular:** Diese Struktur ermöglicht es, im Frontend Funktionen wie "Meine Tiere" anzuzeigen.
+  
+---
+
 📌 Projektstatus
 
 - [x] Backend v0.1 abgeschlossen
