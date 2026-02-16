@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
@@ -18,6 +19,16 @@ class Animal(models.Model):
         AVAILABLE = "AVAILABLE", "Available"
         RESERVED = "RESERVED", "Reserved"
         ADOPTED = "ADOPTED", "Adopted"
+
+    # --- ย้าย owner มาไว้ตรงนี้ (ระดับเดียวกับ name) ---
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,  # เปลี่ยนจาก on_update เป็น on_delete
+        related_name="animals",
+        null=True,
+        blank=True,
+    )
+    # ------------------------------------------
 
     name = models.CharField(max_length=100)
     species = models.CharField(max_length=10, choices=Species.choices)
