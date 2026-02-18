@@ -8,6 +8,7 @@ class Animal(models.Model):
     class Species(models.TextChoices):
         DOG = "DOG", "Dog"
         CAT = "CAT", "Cat"
+        RABBIT = "RABBIT", "Rabbit"
         OTHER = "OTHER", "Other"
 
     class Sex(models.TextChoices):

@@ -5,7 +5,8 @@ from .serializers import AnimalSerializer
 
 class AnimalViewSet(viewsets.ModelViewSet):
     serializer_class = AnimalSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # ✅ แก้บรรทัดนี้ครับ เปลี่ยนจาก IsAuthenticatedOrReadOnly เป็น AllowAny
+    permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
         queryset = Animal.objects.all().order_by("-created_at")
