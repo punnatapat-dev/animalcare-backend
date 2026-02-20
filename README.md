@@ -6,10 +6,12 @@ Dieses Projekt dient dazu, meine Backend-Entwicklungsfähigkeiten zu vertiefen s
 
 ---
 
-## ❤️ Motivation
+## ❤️ Inspiration
 
-Dieses Projekt ist persönlich inspiriert von meinen vier geliebten Hunden:  
-**Almond, Joghurt, Taohoo und Kiekie** 🐶.
+Dieses Projekt ist von meinen vier geliebten Hunden **(Almond🐶, Joghurt🐶, Taohoo🐶 und Kiekie🐶)** inspiriert.
+Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen Anwendung ein persönliches Andenken widmen und Lernen mit etwas Bedeutungsvollem verbinden.
+
+---
 
 ---
 
