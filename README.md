@@ -36,7 +36,14 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 ## 📜 Update-Historie & Projektfortschritt
 
-###✅ **20.02.2026 - API Full CRUD Completion**
+### ✅ **21.02.2026 - JWT & Object-Level Security (Milestone 5)**
+
+- **[New] JWT Authentication**: Integration von `SimpleJWT` für sichere Login-Prozesse.
+- **[New] Object-Level Permissions**: Implementierung von `IsOwnerOrReadOnly`. Nur der Ersteller kann seine eigenen Einträge bearbeiten oder löschen.
+- **[New] Owner Auto-Binding**: Beim Erstellen eines Tieres wird der eingeloggte Benutzer automatisch als `owner` zugewiesen.
+- **[Security] Serializer Protection**: Das `owner`-Feld ist nun schreibgeschützt (ReadOnlyField), um Manipulationen zu verhindern.
+
+### ✅ **20.02.2026 - API Full CRUD Completion**
 
 [New] PUT-Methode: Der Endpoint /api/animals/{id}/ unterstützt nun vollständige Updates.
 
@@ -70,7 +77,7 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 ## 📊 Nächste Schritte
 
-- [ ] **Meilenstein 5: JWT Authentifizierung & Login-System** ⏳ _(Endpoints vorhanden, Frontend-Integration folgt)_
+- [x] **Meilenstein 5: JWT Authentifizierung & Access Control** ✅ _(Backend bereit, Frontend-Anbindung in Arbeit)_
 - [x] **Meilenstein 6: Bearbeitungsmodus (Edit Animal)** ✅
 - [ ] **Meilenstein 7: Media Root & Image Upload** 📸
 
@@ -86,6 +93,18 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 | **DELETE** | `/api/animals/{id}/` | Tier löschen                          |
 
 ---
+
+### 🔑 Authentifizierung & Security
+
+| Methode  | Endpoint              | Beschreibung                                |
+| :------- | :-------------------- | :------------------------------------------ |
+| **POST** | `/api/login/`         | User Login - liefert Access & Refresh Token |
+| **POST** | `/api/token/refresh/` | Erneuert einen abgelaufenen Access Token    |
+
+**Sicherheitsregel:** - `GET`: Öffentlich zugänglich (Read-Only).
+
+- `POST/PUT/DELETE`: Erfordert gültigen JWT-Token.
+- `PUT/DELETE`: Nur für den Benutzer erlaubt, der den Eintrag erstellt hat (Owner).
 
 ## 📦 Installation
 
