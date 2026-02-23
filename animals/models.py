@@ -37,6 +37,8 @@ class Animal(models.Model):
     sex = models.CharField(max_length=10, choices=Sex.choices, default=Sex.UNKNOWN)
     birth_date = models.DateField(null=True, blank=True)
     description = models.TextField(blank=True)
+    image = models.ImageField(upload_to="animals/", null=True, blank=True)
+
     status = models.CharField(
         max_length=20, choices=Status.choices, default=Status.AVAILABLE
     )

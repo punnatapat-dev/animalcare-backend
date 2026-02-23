@@ -162,3 +162,5 @@ SIMPLE_JWT = {
     "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",
     "JTI_CLAIM": "jti",
 }
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"

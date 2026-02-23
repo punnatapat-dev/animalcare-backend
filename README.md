@@ -36,6 +36,18 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 ## 📜 Update-Historie & Projektfortschritt
 
+### ✅ **23.02.2026 - Owner Data Fix & Image Handling Stabilization (Milestone 6.1)**
+
+- **[Fix] Owner-Data Migration:** Bestehende Tierdatensätze ohne `owner` wurden nachträglich per Django-Shell korrigiert, um Object-Level Permissions vollständig funktionsfähig zu machen.
+- **[Fix] 403 Forbidden Issue:** Behebung von Update-Fehlern durch fehlende Owner-Zuweisung.
+- **[Improvement] Image Upload Stabilization:** Sicherstellung der korrekten Verarbeitung von `multipart/form-data` für Bild-Uploads.
+- **[Refactoring] Permission Cleanup:** Entfernung temporärer `AllowAny`-Konfiguration zur Wiederherstellung sicherer Zugriffskontrolle.
+- **[Validation] End-to-End Test:** Erfolgreiche Verifizierung von:
+  - JWT Authentication
+  - Owner Auto-Binding
+  - Update & Delete mit Object-Level Security
+  - Image Upload & Media Serving
+
 ### ✅ **21.02.2026 - JWT & Object-Level Security (Milestone 5)**
 
 - **[New] JWT Authentication**: Integration von `SimpleJWT` für sichere Login-Prozesse.
@@ -79,7 +91,8 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 - [x] **Meilenstein 5: JWT Authentifizierung & Access Control** ✅ _(Backend bereit, Frontend-Anbindung in Arbeit)_
 - [x] **Meilenstein 6: Bearbeitungsmodus (Edit Animal)** ✅
-- [ ] **Meilenstein 7: Media Root & Image Upload** 📸
+- [x] Meilenstein 7: Media Root & Image Upload 📸 (Development Environment abgeschlossen)
+- [ ] Meilenstein 8: Production Media Storage (Cloud / S3)
 
 ---
 
