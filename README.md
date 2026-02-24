@@ -36,6 +36,13 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 ## 📜 Update-Historie & Projektfortschritt
 
+### ✅ **24.02.2026 - Media URLs + API Konsistenz & Permissions Final Check (Milestone 7.2)**
+
+- **[Improvement] Absolute Image URLs**: API liefert Bild-URLs stabil (z.B. `http://127.0.0.1:8000/media/...`) für direkte Frontend-Nutzung.
+- **[Fix] Konsistente Response-Struktur**: Pagination / `results`-Format wurde geprüft (Frontend arbeitet zuverlässig mit `data.results`).
+- **[Security] Permissions Re-Check**: Object-Level Permissions (`IsOwnerOrReadOnly`) + JWT Zugriff final gegengeprüft (PUT/DELETE nur Owner).
+- **[Stability] End-to-End Stabilisierung**: Upload, Anzeigen, Bearbeiten und Löschen inklusive Bilder erfolgreich getestet.
+
 ### ✅ **23.02.2026 - Owner Data Fix & Image Handling Stabilization (Milestone 6.1)**
 
 - **[Fix] Owner-Data Migration:** Bestehende Tierdatensätze ohne `owner` wurden nachträglich per Django-Shell korrigiert, um Object-Level Permissions vollständig funktionsfähig zu machen.
@@ -104,6 +111,7 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 | **POST**   | `/api/animals/`      | Neues Tier erstellen                  |
 | **GET**    | `/api/animals/{id}/` | Einzelnes Tier abrufen                |
 | **DELETE** | `/api/animals/{id}/` | Tier löschen                          |
+| **PUT**    | `/api/animals/{id}/` | Tier aktualisieren                    |
 
 ---
 
