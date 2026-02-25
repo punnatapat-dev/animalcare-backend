@@ -98,8 +98,9 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 - [x] **Meilenstein 5: JWT Authentifizierung & Access Control** ✅ _(Backend bereit, Frontend-Anbindung in Arbeit)_
 - [x] **Meilenstein 6: Bearbeitungsmodus (Edit Animal)** ✅
-- [x] Meilenstein 7: Media Root & Image Upload 📸 (Development Environment abgeschlossen)
-- [ ] Meilenstein 8: Production Media Storage (Cloud / S3)
+- [x] Meilenstein 7: Media Root & Image Upload 📸 (Local Development abgeschlossen - Git-ignored)
+
+- [ ] Meilenstein 8: Production Storage Integration (Switching from Local Media to Cloudinary or AWS S3)
 
 ---
 
@@ -143,3 +144,18 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 ```
+
+---
+
+## 🖼️ Media & Database Management
+
+Um das Repository leicht zu halten und die Privatsphäre der Entwicklungsdaten zu schützen, werden folgende Dateien **nicht** auf GitHub übertragen (siehe `.gitignore`):
+
+- **`media/`**: Dieser Ordner enthält alle hochgeladenen Tierbilder im lokalen Development.
+- **`db.sqlite3`**: Die lokale Datenbank mit Test-Usern und Einträgen.
+
+### 🛠️ Setup für lokale Entwicklung:
+
+1. Nach dem Klonen des Projekts ist der Ordner `media/` leer.
+2. Wenn du ein Tier über die API/Admin-Panel erstellst und ein Bild hochlädst, wird der Ordner automatisch erstellt.
+3. **Produktion:** In einer Produktionsumgebung (z.B. Heroku/DigitalOcean) sollten diese Dateien auf einem Cloud-Speicher wie **AWS S3** oder **Cloudinary** gespeichert werden.
