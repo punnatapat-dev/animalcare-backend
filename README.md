@@ -4,6 +4,16 @@ AnimalCare ist ein RESTful Backend-System für eine Tierarzt- und Tiervermittlun
 
 Dieses Projekt dient dazu, meine Backend-Entwicklungsfähigkeiten zu vertiefen sowie eine strukturierte Adoptionsverwaltung zu simulieren.
 
+## 📸 Project Preview
+
+### 🖥️ Frontend (Angular)
+
+![Frontend Dashboard](./screenshots/frontend-dashboard.jpg)
+
+### ⚙️ Backend API (Django REST Framework)
+
+![Backend API](./screenshots/backend-api.png)
+
 ---
 
 ## ❤️ Inspiration
