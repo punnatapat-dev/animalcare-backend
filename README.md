@@ -8,7 +8,7 @@ Dieses Projekt dient dazu, meine Backend-Entwicklungsfähigkeiten zu vertiefen s
 
 ### 🖥️ Frontend (Angular)
 
-![Frontend Dashboard](./screenshots/frontend-dashboard.jpg)
+![Frontend Dashboard](./screenshots/frontend-dashboard.png)
 
 ### ⚙️ Backend API (Django REST Framework)
 
