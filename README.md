@@ -41,10 +41,26 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 - **Framework:** Django & Django REST Framework
 - **Datenbank:** SQLite (Entwicklung)
 - **Authentifizierung:** JWT (JSON Web Tokens)
+- **Cloud Storage:** Cloudinary (Production Media Storage)
 
 ---
 
 ## 📜 Update-Historie & Projektfortschritt
+
+### ✅ **26.02.2026 – Cloudinary Production Storage Integration (Milestone 8)**
+
+- **[New] Cloudinary Integration:** Migration von lokalem `MEDIA_ROOT` Storage zu Cloudinary Cloud Storage.
+- **[Upload] Multipart Image Handling:** Backend verarbeitet nun `multipart/form-data` und lädt Bilder automatisch zu Cloudinary hoch.
+- **[Auto-Binding] Owner + Image Upload kombiniert:** Beim Erstellen eines Tieres wird:
+  - Der eingeloggte User automatisch als Owner gesetzt
+  - Das Bild zu Cloudinary hochgeladen
+  - `image_url` und `image_public_id` in der Datenbank gespeichert
+- **[Update Logic] Image Replacement:** Beim Bearbeiten eines Tieres wird:
+  - Das alte Bild in Cloudinary automatisch gelöscht
+  - Das neue Bild hochgeladen
+  - Die Datenbank aktualisiert
+- **[Security] Serializer Protection:** Das temporäre Upload-Feld `image` ist `write_only`, um Model-Fehler zu vermeiden.
+- **[Validation] End-to-End getestet:** Angular → Django → Cloudinary → DB → Angular Rendering erfolgreich verifiziert.
 
 ### ✅ **24.02.2026 - Media URLs + API Konsistenz & Permissions Final Check (Milestone 7.2)**
 
@@ -128,10 +144,12 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 ### 🔑 Authentifizierung & Security
 
-| Methode  | Endpoint              | Beschreibung                                |
-| :------- | :-------------------- | :------------------------------------------ |
-| **POST** | `/api/login/`         | User Login - liefert Access & Refresh Token |
-| **POST** | `/api/token/refresh/` | Erneuert einen abgelaufenen Access Token    |
+| Methode  | Endpoint              | Beschreibung                                            |
+| :------- | :-------------------- | :------------------------------------------------------ |
+| **POST** | `/api/login/`         | User Login - liefert Access & Refresh Token             |
+| **POST** | `/api/token/refresh/` | Erneuert einen abgelaufenen Access Token                |
+| **POST** | `/api/animals/`       | Neues Tier erstellen (inkl. Bild-Upload via Cloudinary) |
+| **PUT**  | `/api/animals/{id}/`  | Tier aktualisieren (inkl. Bildersatz)                   |
 
 **Sicherheitsregel:** - `GET`: Öffentlich zugänglich (Read-Only).
 
@@ -157,15 +175,29 @@ python manage.py runserver
 
 ---
 
-## 🖼️ Media & Database Management
+## 🖼️ Media & Storage
 
-Um das Repository leicht zu halten und die Privatsphäre der Entwicklungsdaten zu schützen, werden folgende Dateien **nicht** auf GitHub übertragen (siehe `.gitignore`):
+### ☁️ Cloudinary Production Storage
 
-- **`media/`**: Dieser Ordner enthält alle hochgeladenen Tierbilder im lokalen Development.
-- **`db.sqlite3`**: Die lokale Datenbank mit Test-Usern und Einträgen.
+Dieses Projekt verwendet nun **Cloudinary** als Cloud Storage Lösung für Bilder.
 
-### 🛠️ Setup für lokale Entwicklung:
+### 🔄 Storage-Strategie
 
-1. Nach dem Klonen des Projekts ist der Ordner `media/` leer.
-2. Wenn du ein Tier über die API/Admin-Panel erstellst und ein Bild hochlädst, wird der Ordner automatisch erstellt.
-3. **Produktion:** In einer Produktionsumgebung (z.B. Heroku/DigitalOcean) sollten diese Dateien auf einem Cloud-Speicher wie **AWS S3** oder **Cloudinary** gespeichert werden.
+- Bilder werden nicht mehr lokal im `media/`-Ordner gespeichert.
+- Keine Bilddateien werden im Repository versioniert.
+- Upload erfolgt direkt von Django → Cloudinary.
+- `image_url` speichert die öffentliche Cloudinary-URL.
+- `image_public_id` ermöglicht das Ersetzen oder Löschen bestehender Bilder.
+
+### 🔁 Image Replacement Logic
+
+Beim Aktualisieren eines Tieres:
+
+- Das alte Bild wird automatisch in Cloudinary gelöscht.
+- Das neue Bild wird hochgeladen.
+- Die Datenbank wird entsprechend aktualisiert.
+
+### 🔐 Sicherheit
+
+- Bild-Uploads erfolgen ausschließlich über authentifizierte Requests.
+- Das temporäre Upload-Feld (`image`) ist `write_only` im Serializer.

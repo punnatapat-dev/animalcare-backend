@@ -5,6 +5,7 @@ from django.conf import settings
 
 
 class Animal(models.Model):
+
     class Species(models.TextChoices):
         DOG = "DOG", "Dog"
         CAT = "CAT", "Cat"
@@ -37,7 +38,8 @@ class Animal(models.Model):
     sex = models.CharField(max_length=10, choices=Sex.choices, default=Sex.UNKNOWN)
     birth_date = models.DateField(null=True, blank=True)
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to="animals/", null=True, blank=True)
+    image_url = models.URLField(blank=True, null=True)
+    image_public_id = models.CharField(max_length=255, blank=True, null=True)
 
     status = models.CharField(
         max_length=20, choices=Status.choices, default=Status.AVAILABLE

@@ -2,6 +2,6 @@ from rest_framework.routers import DefaultRouter
 from .views import AnimalViewSet
 
 router = DefaultRouter()
-router.register(r"animals", AnimalViewSet, basename="animal")
+router.register(r"animals", AnimalViewSet, basename="animals")
 
 urlpatterns = router.urls
