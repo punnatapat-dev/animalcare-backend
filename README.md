@@ -47,6 +47,14 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 ## 📜 Update-Historie & Projektfortschritt
 
+### ✅ **27.02.2026 – Pagination Removal & API Response Stabilisierung (Milestone 9)**
+
+- **[Backend] Pagination deaktiviert:** Entfernung von `DEFAULT_PAGINATION_CLASS` und `PAGE_SIZE`, damit `/api/animals/` nun alle Tiere in einer einzigen Response liefert.
+- **[API Change] Response-Struktur vereinfacht:** Statt `{ results: [...] }` wird nun direkt ein Array zurückgegeben.
+- **[Frontend-Kompatibilität] API-Format dokumentiert:** Anpassung und Validierung der API-Kommunikation nach Pagination-Entfernung.
+- **[Stability] End-to-End Re-Test:** Login → Create → Image Upload (Cloudinary) → Update → Delete erfolgreich erneut getestet.
+- **[Code Cleanup] REST_FRAMEWORK Settings bereinigt:** Entfernen nicht benötigter Pagination-Konfiguration für klarere Production-Settings.
+
 ### ✅ **26.02.2026 – Cloudinary Production Storage Integration (Milestone 8)**
 
 - **[New] Cloudinary Integration:** Migration von lokalem `MEDIA_ROOT` Storage zu Cloudinary Cloud Storage.
@@ -126,7 +134,8 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 - [x] **Meilenstein 6: Bearbeitungsmodus (Edit Animal)** ✅
 - [x] Meilenstein 7: Media Root & Image Upload 📸 (Local Development abgeschlossen - Git-ignored)
 
-- [ ] Meilenstein 8: Production Storage Integration (Switching from Local Media to Cloudinary or AWS S3)
+- [x] Meilenstein 8: Cloudinary Production Storage Integration ☁️ ✅
+- [ ] Meilenstein 9: API Performance & Deployment Preparation 🚀
 
 ---
 
