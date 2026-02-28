@@ -16,6 +16,10 @@ class AnimalViewSet(viewsets.ModelViewSet):
         queryset = Animal.objects.all().order_by("-created_at")
         status = self.request.query_params.get("status")
         search = self.request.query_params.get("search")
+        species = self.request.query_params.get("species")
+
+        if species:
+            queryset = queryset.filter(species=species)
 
         if status:
             queryset = queryset.filter(status=status)

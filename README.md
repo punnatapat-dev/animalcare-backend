@@ -47,6 +47,15 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 ## 📜 Update-Historie & Projektfortschritt
 
+### ✅ **28.02.2026 – Species Query Filtering Support (API Enhancement)**
+
+- **[New] Species Query Parameter:** Unterstützung von `?species=DOG` in `get_queryset()`.
+- **[Combined Filtering] Mehrere Query-Parameter möglich:** `species`, `search` und `status` können kombiniert werden.
+- **[Server-Side Filtering] Performance-Optimierung:** Daten werden direkt serverseitig gefiltert.
+- **[Validation] API-Test erfolgreich:** Beispiele wie  
+  `/api/animals/?species=DOG&search=lu` liefern korrekte Ergebnisse.
+- **[Frontend-Kompatibilität] Angular Dropdown vollständig unterstützt.**
+
 ### ✅ **27.02.2026 – Pagination Removal & API Response Stabilisierung (Milestone 9)**
 
 - **[Backend] Pagination deaktiviert:** Entfernung von `DEFAULT_PAGINATION_CLASS` und `PAGE_SIZE`, damit `/api/animals/` nun alle Tiere in einer einzigen Response liefert.
@@ -141,13 +150,14 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 ## 📡 API-Endpunkte
 
-| Methode    | Endpoint             | Beschreibung                          |
-| :--------- | :------------------- | :------------------------------------ |
-| **GET**    | `/api/animals/`      | Liste aller Tiere (mit Search/Filter) |
-| **POST**   | `/api/animals/`      | Neues Tier erstellen                  |
-| **GET**    | `/api/animals/{id}/` | Einzelnes Tier abrufen                |
-| **DELETE** | `/api/animals/{id}/` | Tier löschen                          |
-| **PUT**    | `/api/animals/{id}/` | Tier aktualisieren                    |
+| Methode    | Endpoint             | Beschreibung                                                     |
+| :--------- | :------------------- | :--------------------------------------------------------------- |
+| **GET**    | `/api/animals/`      | Liste aller Tiere (mit Search/Filter)                            |
+| **POST**   | `/api/animals/`      | Neues Tier erstellen                                             |
+| **GET**    | `/api/animals/{id}/` | Einzelnes Tier abrufen                                           |
+| **DELETE** | `/api/animals/{id}/` | Tier löschen                                                     |
+| **PUT**    | `/api/animals/{id}/` | Tier aktualisieren                                               |
+| **GET**    | `/api/animals/`      | Liste aller Tiere (Search, Status- & Species-Filter unterstützt) |
 
 ---
 
