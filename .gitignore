@@ -1,8 +1,8 @@
-# Ignore Local Media
-media/
-
-# Ignore Database
-db.sqlite3
-
-# Ignore Environment Variables
 .env
+__pycache__/
+*.pyc
+venv/
+media/
+staticfiles/
+db.sqlite3
+*.sqlite3
