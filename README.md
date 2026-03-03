@@ -27,11 +27,13 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 ## ✨ Funktionen & Features
 
-- **CRUD-API:** Vollständige Verwaltung von Tierdaten (Create, Read, Update, Delete).
-- **RESTful Architektur:** Strukturierte API-Endpunkte für Frontend-Integration.
-- **Berechtigungssystem:** Schutz der Daten durch `IsAuthenticatedOrReadOnly`.
-- **CORS-Konfiguration:** Sicherer Zugriff für das Angular-Frontend (localhost:4200).
-- **Datenmodell:** Unterstützung verschiedener Tierarten (DOG, CAT, RABBIT, OTHER).
+- **CRUD-API:** Vollständige Verwaltung von Tierdaten (Create, Read, Update, Delete)
+- **RESTful Architektur:** Strukturierte API-Endpunkte für Frontend-Integration
+- **JWT Authentication:** Sicherer Login mit Access & Refresh Token
+- **Object-Level Permissions:** Nur Owner darf eigene Einträge bearbeiten/löschen
+- **CORS-Konfiguration:** Sicherer Zugriff für Angular-Frontend
+- **Cloudinary Integration:** Cloud Storage für Bild-Uploads
+- **Server-Side Filtering:** Filter nach `species`, `search`, `status`
 
 ---
 
@@ -39,9 +41,35 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 - **Sprache:** Python 3.13
 - **Framework:** Django & Django REST Framework
-- **Datenbank:** SQLite (Entwicklung)
-- **Authentifizierung:** JWT (JSON Web Tokens)
-- **Cloud Storage:** Cloudinary (Production Media Storage)
+- **Datenbank:** SQLite (Development) / PostgreSQL (Production ready)
+- **Authentifizierung:** JWT (SimpleJWT)
+- **Cloud Storage:** Cloudinary
+- **WSGI Server:** Gunicorn
+- **Static Handling:** Whitenoise
+
+---
+
+## 🚀 Deployment (Production Ready)
+
+Dieses Backend ist für Production Deployment vorbereitet.
+
+### Verwendete Technologien
+
+- Gunicorn (WSGI Server)
+- Whitenoise (Static File Handling)
+- dj-database-url (Environment Database Config)
+- PostgreSQL Support
+
+### Environment Variables (Beispiel)
+
+````env
+DEBUG=False
+SECRET_KEY=your-secret
+ALLOWED_HOSTS=your-service.onrender.com
+DATABASE_URL=postgres://...
+CLOUDINARY_CLOUD_NAME=...
+CLOUDINARY_API_KEY=...
+CLOUDINARY_API_SECRET=...
 
 ---
 
@@ -52,7 +80,7 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 - **[New] Species Query Parameter:** Unterstützung von `?species=DOG` in `get_queryset()`.
 - **[Combined Filtering] Mehrere Query-Parameter möglich:** `species`, `search` und `status` können kombiniert werden.
 - **[Server-Side Filtering] Performance-Optimierung:** Daten werden direkt serverseitig gefiltert.
-- **[Validation] API-Test erfolgreich:** Beispiele wie  
+- **[Validation] API-Test erfolgreich:** Beispiele wie
   `/api/animals/?species=DOG&search=lu` liefern korrekte Ergebnisse.
 - **[Frontend-Kompatibilität] Angular Dropdown vollständig unterstützt.**
 
@@ -190,7 +218,7 @@ pip install -r requirements.txt
 # Migrationen & Server-Start
 python manage.py migrate
 python manage.py runserver
-```
+````
 
 ---
 
