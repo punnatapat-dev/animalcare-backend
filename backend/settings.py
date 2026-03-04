@@ -81,7 +81,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = "static/"
 
 # ========================
 # REST FRAMEWORK
@@ -137,3 +136,5 @@ cloudinary.config(
     api_secret=os.getenv("CLOUDINARY_API_SECRET"),
     secure=True,
 )
+STATIC_URL = "/static/"
+STATIC_ROOT = "staticfiles"
