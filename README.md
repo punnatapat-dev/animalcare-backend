@@ -74,7 +74,7 @@ https://animalcare-backend.onrender.com/api/animals/
 
 ### Environment Variables (Beispiel)
 
-````env
+```env
 DEBUG=False
 SECRET_KEY=your-secret
 ALLOWED_HOSTS=your-service.onrender.com
@@ -82,6 +82,7 @@ DATABASE_URL=postgres://...
 CLOUDINARY_CLOUD_NAME=...
 CLOUDINARY_API_KEY=...
 CLOUDINARY_API_SECRET=...
+```
 
 ---
 
@@ -285,7 +286,7 @@ pip install -r requirements.txt
 # Migrationen & Server-Start
 python manage.py migrate
 python manage.py runserver
-````
+```
 
 ---
 
