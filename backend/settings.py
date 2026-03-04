@@ -22,16 +22,19 @@ load_dotenv()
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-secret-key")
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
+# ดึงค่าจาก ENV และเพิ่มโดเมน Render เข้าไปเป็นค่าเริ่มต้น
 ALLOWED_HOSTS = [
     h.strip() for h in os.getenv("ALLOWED_HOSTS", "").split(",") if h.strip()
 ]
-if not ALLOWED_HOSTS:
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+# เพิ่มโดเมน Render และ local เข้าไปโดยตรง
+ALLOWED_HOSTS.extend(["animalcare-backend.onrender.com", "localhost", "127.0.0.1"])
 
-# กัน CSRF ตอน deploy (ใส่ใน Render ENV)
+# กัน CSRF ตอน deploy (รวมโดเมน Render ไว้ด้วยเพื่อให้ส่งข้อมูล POST/PUT ได้)
 CSRF_TRUSTED_ORIGINS = [
     o.strip() for o in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",") if o.strip()
 ]
+if "https://animalcare-backend.onrender.com" not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append("https://animalcare-backend.onrender.com")
 
 # ========================
 # APPS
@@ -90,7 +93,6 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 # ========================
 # DATABASE
-# (ยังใช้ sqlite ได้ / ถ้าจะใช้ Postgres ค่อยเปลี่ยนทีหลัง)
 # ========================
 
 DATABASES = {
@@ -138,13 +140,11 @@ REST_FRAMEWORK = {
 # CORS
 # ========================
 
-# local dev
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "http://127.0.0.1:4200",
 ]
 
-# production (set in Render ENV)
 extra_cors = [
     o.strip() for o in os.getenv("CORS_ALLOWED_ORIGINS", "").split(",") if o.strip()
 ]
@@ -163,7 +163,7 @@ SIMPLE_JWT = {
 }
 
 # ========================
-# MEDIA (local - ไม่ใช้ production แล้ว แต่ไม่พัง)
+# MEDIA
 # ========================
 
 MEDIA_URL = "/media/"
