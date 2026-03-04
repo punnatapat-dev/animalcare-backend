@@ -53,6 +53,18 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 Dieses Backend ist für Production Deployment vorbereitet.
 
+## 🌍 Live API
+
+The backend API is deployed on Render.
+
+Base URL:
+
+https://animalcare-backend.onrender.com
+
+Example endpoint:
+
+https://animalcare-backend.onrender.com/api/animals/
+
 ### Verwendete Technologien
 
 - Gunicorn (WSGI Server)
@@ -74,6 +86,15 @@ CLOUDINARY_API_SECRET=...
 ---
 
 ## 📜 Update-Historie & Projektfortschritt
+
+### ✅ 04.03.2026 – Production Deployment (Render)
+
+- Backend successfully deployed on Render
+- Gunicorn configured as WSGI server
+- Static files served with Whitenoise
+- Environment variables configured
+- Cloudinary image storage working in production
+- Public API endpoint available
 
 ### ✅ **28.02.2026 – Species Query Filtering Support (API Enhancement)**
 
@@ -172,7 +193,35 @@ CLOUDINARY_API_SECRET=...
 - [x] Meilenstein 7: Media Root & Image Upload 📸 (Local Development abgeschlossen - Git-ignored)
 
 - [x] Meilenstein 8: Cloudinary Production Storage Integration ☁️ ✅
-- [ ] Meilenstein 9: API Performance & Deployment Preparation 🚀
+- [x] Meilenstein 9: API Performance & Deployment Preparation 🚀
+
+---
+
+## 🔎 API Filtering Examples
+
+Filter animals by species
+
+```
+/api/animals/?species=DOG
+```
+
+Search animals by name
+
+```
+/api/animals/?search=jo
+```
+
+Filter by availability status
+
+```
+/api/animals/?status=AVAILABLE
+```
+
+Combined filters
+
+```
+/api/animals/?species=DOG&search=jo
+```
 
 ---
 
@@ -186,6 +235,24 @@ CLOUDINARY_API_SECRET=...
 | **DELETE** | `/api/animals/{id}/` | Tier löschen                                                     |
 | **PUT**    | `/api/animals/{id}/` | Tier aktualisieren                                               |
 | **GET**    | `/api/animals/`      | Liste aller Tiere (Search, Status- & Species-Filter unterstützt) |
+
+---
+
+## 🧪 Example API Response
+
+GET /api/animals/
+
+```json
+[
+  {
+    "id": 19,
+    "name": "Joghurt",
+    "species": "DOG",
+    "breed": "mixed",
+    "status": "AVAILABLE"
+  }
+]
+```
 
 ---
 
