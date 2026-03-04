@@ -4,19 +4,38 @@ Django settings for backend project.
 
 from pathlib import Path
 import os
+from datetime import timedelta
+
 from dotenv import load_dotenv
 import cloudinary
 
 # Build paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# โหลด .env
-load_dotenv(BASE_DIR / ".env")
+# โหลด .env (ใช้ตอน local เท่านั้น / บน Render ใช้ Environment Variables)
+load_dotenv()
 
-SECRET_KEY = "django-insecure-zdnud^_@#(mc=c!w3vdhri_!tjhj+%bql&7o!dwzxrqz(3a94u"
+# ========================
+# CORE (SECRET / DEBUG / HOSTS)
+# ========================
 
-DEBUG = True
-ALLOWED_HOSTS = []
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-secret-key")
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+
+ALLOWED_HOSTS = [
+    h.strip() for h in os.getenv("ALLOWED_HOSTS", "").split(",") if h.strip()
+]
+if not ALLOWED_HOSTS:
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
+# กัน CSRF ตอน deploy (ใส่ใน Render ENV)
+CSRF_TRUSTED_ORIGINS = [
+    o.strip() for o in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",") if o.strip()
+]
+
+# ========================
+# APPS
+# ========================
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -30,9 +49,14 @@ INSTALLED_APPS = [
     "animals",
 ]
 
+# ========================
+# MIDDLEWARE
+# ========================
+
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # ✅ static on Render
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -42,6 +66,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "backend.urls"
+
+# ========================
+# TEMPLATES
+# ========================
 
 TEMPLATES = [
     {
@@ -60,12 +88,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
+# ========================
+# DATABASE
+# (ยังใช้ sqlite ได้ / ถ้าจะใช้ Postgres ค่อยเปลี่ยนทีหลัง)
+# ========================
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# ========================
+# PASSWORD VALIDATION
+# ========================
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -81,6 +118,7 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # ========================
 # REST FRAMEWORK
@@ -100,16 +138,21 @@ REST_FRAMEWORK = {
 # CORS
 # ========================
 
+# local dev
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "http://127.0.0.1:4200",
 ]
 
+# production (set in Render ENV)
+extra_cors = [
+    o.strip() for o in os.getenv("CORS_ALLOWED_ORIGINS", "").split(",") if o.strip()
+]
+CORS_ALLOWED_ORIGINS += extra_cors
+
 # ========================
 # JWT
 # ========================
-
-from datetime import timedelta
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
@@ -120,7 +163,7 @@ SIMPLE_JWT = {
 }
 
 # ========================
-# MEDIA (ไม่ใช้ local แล้ว)
+# MEDIA (local - ไม่ใช้ production แล้ว แต่ไม่พัง)
 # ========================
 
 MEDIA_URL = "/media/"
@@ -136,5 +179,10 @@ cloudinary.config(
     api_secret=os.getenv("CLOUDINARY_API_SECRET"),
     secure=True,
 )
+
+# ========================
+# STATIC
+# ========================
+
 STATIC_URL = "/static/"
-STATIC_ROOT = "staticfiles"
+STATIC_ROOT = BASE_DIR / "staticfiles"
