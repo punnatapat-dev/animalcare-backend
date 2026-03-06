@@ -108,18 +108,18 @@ CLOUDINARY_API_SECRET=...
 
 ## 📜 Update-Historie & Projektfortschritt
 
+### ✅ 06.03.2026 – Production Deployment (Render)
+
+- CORS-Konfiguration aktualisiert, um Zugriff vom Netlify-Frontend zu erlauben
+
 ### ✅ 04.03.2026 – Production Deployment (Render)
 
-- CORS configuration updated to allow Netlify frontend
-
-### ✅ 04.03.2026 – Production Deployment (Render)
-
-- Backend successfully deployed on Render
-- Gunicorn configured as WSGI server
-- Static files served with Whitenoise
-- Environment variables configured
-- Cloudinary image storage working in production
-- Public API endpoint available
+- Backend erfolgreich auf Render deployt
+- Gunicorn als WSGI-Server konfiguriert
+- Statische Dateien werden über Whitenoise bereitgestellt
+- Environment-Variablen für Production konfiguriert
+- Cloudinary Bildspeicherung funktioniert in der Production-Umgebung
+- Öffentlicher API-Endpunkt verfügbar
 
 ### ✅ **28.02.2026 – Species Query Filtering Support (API Enhancement)**
 
