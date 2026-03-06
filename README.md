@@ -23,7 +23,21 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 ---
 
+## 🌍 Live Demo
+
+Frontend (Netlify):  
+https://visionary-tapioca-be6cbf.netlify.app
+
+Backend API (Render):  
+https://animalcare-backend.onrender.com/api/animals/
+
 ---
+
+## 🏗 System Architecture
+
+Frontend: Angular (Netlify)  
+Backend: Django REST Framework (Render)  
+Image Storage: Cloudinary
 
 ## ✨ Funktionen & Features
 
@@ -53,9 +67,9 @@ Auch wenn sie heute nicht mehr bei mir sind, wollte ich ihnen mit dieser kleinen
 
 Dieses Backend ist für Production Deployment vorbereitet.
 
-## 🌍 Live API
+## 🌍 Live Deployment
 
-The backend API is deployed on Render.
+### Backend API (Render)
 
 Base URL:
 
@@ -64,6 +78,12 @@ https://animalcare-backend.onrender.com
 Example endpoint:
 
 https://animalcare-backend.onrender.com/api/animals/
+
+### Frontend Application (Netlify)
+
+https://visionary-tapioca-be6cbf.netlify.app
+
+---
 
 ### Verwendete Technologien
 
@@ -87,6 +107,10 @@ CLOUDINARY_API_SECRET=...
 ---
 
 ## 📜 Update-Historie & Projektfortschritt
+
+### ✅ 04.03.2026 – Production Deployment (Render)
+
+- CORS configuration updated to allow Netlify frontend
 
 ### ✅ 04.03.2026 – Production Deployment (Render)
 
@@ -231,7 +255,7 @@ Combined filters
 | Methode    | Endpoint             | Beschreibung                                                     |
 | :--------- | :------------------- | :--------------------------------------------------------------- |
 | **GET**    | `/api/animals/`      | Liste aller Tiere (mit Search/Filter)                            |
-| **POST**   | `/api/animals/`      | Neues Tier erstellen                                             |
+| **POST**   | `/api/token/`        | User Login - returns Access & Refresh Token                      |
 | **GET**    | `/api/animals/{id}/` | Einzelnes Tier abrufen                                           |
 | **DELETE** | `/api/animals/{id}/` | Tier löschen                                                     |
 | **PUT**    | `/api/animals/{id}/` | Tier aktualisieren                                               |
