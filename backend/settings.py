@@ -143,6 +143,7 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "http://127.0.0.1:4200",
+    "https://visionary-tapioca-be6cbf.netlify.app",
 ]
 
 extra_cors = [
