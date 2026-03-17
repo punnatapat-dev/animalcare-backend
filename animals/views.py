@@ -5,6 +5,8 @@ import cloudinary.uploader
 from .models import Animal
 from .serializers import AnimalSerializer
 from .permissions import IsOwnerOrReadOnly
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 
 class AnimalViewSet(viewsets.ModelViewSet):
@@ -28,8 +30,32 @@ class AnimalViewSet(viewsets.ModelViewSet):
 
         return queryset
 
+    @action(detail=False, methods=["get"], url_path="stats")
+    def stats(self, request):
+        total = Animal.objects.count()
+        available = Animal.objects.filter(status="AVAILABLE").count()
+        adopted = Animal.objects.filter(status="ADOPTED").count()
+        pending = Animal.objects.filter(status="PENDING").count()
+
+        dogs = Animal.objects.filter(species="DOG").count()
+        cats = Animal.objects.filter(species="CAT").count()
+        rabbits = Animal.objects.filter(species="RABBIT").count()
+        other = Animal.objects.filter(species="OTHER").count()
+
+        return Response(
+            {
+                "total": total,
+                "available": available,
+                "adopted": adopted,
+                "pending": pending,
+                "dogs": dogs,
+                "cats": cats,
+                "rabbits": rabbits,
+                "other": other,
+            }
+        )
+
     def perform_create(self, serializer):
-        # ✅ เอาไฟล์ออกจาก validated_data ก่อน ไม่งั้น serializer.save() จะส่งเข้า model แล้วพัง
         image_file = serializer.validated_data.pop("image", None)
 
         animal = serializer.save(owner=self.request.user)
@@ -45,13 +71,11 @@ class AnimalViewSet(viewsets.ModelViewSet):
             animal.save(update_fields=["image_url", "image_public_id"])
 
     def perform_update(self, serializer):
-        # ✅ รองรับ PUT/PATCH เปลี่ยนรูป
         image_file = serializer.validated_data.pop("image", None)
 
         animal = serializer.save()
 
         if image_file:
-            # ลบรูปเก่าบน Cloudinary ถ้ามี
             if animal.image_public_id:
                 cloudinary.uploader.destroy(
                     animal.image_public_id, resource_type="image"

@@ -108,6 +108,13 @@ CLOUDINARY_API_SECRET=...
 
 ## 📜 Update-Historie & Projektfortschritt
 
+### ✅ 17.03.2026 – Statistik-Endpoint hinzugefügt
+
+- Neuer API-Endpoint `/api/animals/stats/` implementiert
+- Liefert zusammengefasste Tierstatistiken als JSON
+- Enthält Gesamtanzahl sowie Verteilung nach Status und Tierart
+- Grundlage für zukünftige Dashboard- und Admin-Funktionen geschaffen
+
 ### ✅ 06.03.2026 – Production Deployment (Render)
 
 - CORS-Konfiguration aktualisiert, um Zugriff vom Netlify-Frontend zu erlauben
