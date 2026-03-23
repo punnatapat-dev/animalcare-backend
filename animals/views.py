@@ -25,6 +25,7 @@ class AnimalViewSet(viewsets.ModelViewSet):
 
         if status:
             queryset = queryset.filter(status=status)
+
         if search:
             queryset = queryset.filter(name__icontains=search)
 
@@ -34,8 +35,8 @@ class AnimalViewSet(viewsets.ModelViewSet):
     def stats(self, request):
         total = Animal.objects.count()
         available = Animal.objects.filter(status="AVAILABLE").count()
+        reserved = Animal.objects.filter(status="RESERVED").count()
         adopted = Animal.objects.filter(status="ADOPTED").count()
-        pending = Animal.objects.filter(status="PENDING").count()
 
         dogs = Animal.objects.filter(species="DOG").count()
         cats = Animal.objects.filter(species="CAT").count()
@@ -46,14 +47,25 @@ class AnimalViewSet(viewsets.ModelViewSet):
             {
                 "total": total,
                 "available": available,
+                "reserved": reserved,
                 "adopted": adopted,
-                "pending": pending,
                 "dogs": dogs,
                 "cats": cats,
                 "rabbits": rabbits,
                 "other": other,
             }
         )
+
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="my",
+        permission_classes=[permissions.IsAuthenticated],
+    )
+    def my(self, request):
+        animals = Animal.objects.filter(owner=request.user).order_by("-created_at")
+        serializer = AnimalSerializer(animals, many=True)
+        return Response(serializer.data)
 
     def perform_create(self, serializer):
         image_file = serializer.validated_data.pop("image", None)
