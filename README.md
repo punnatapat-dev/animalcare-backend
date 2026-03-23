@@ -108,6 +108,11 @@ CLOUDINARY_API_SECRET=...
 
 ## 📜 Update-Historie & Projektfortschritt
 
+### ✅ 23.03.2026 – Endpoint für eigene Tiere hinzugefügt
+
+- Neuer Endpoint `/api/animals/my/` implementiert
+- Gibt nur Tiere des eingeloggten Benutzers zurück
+
 ### ✅ 17.03.2026 – Statistik-Endpoint hinzugefügt
 
 - Neuer API-Endpoint `/api/animals/stats/` implementiert
