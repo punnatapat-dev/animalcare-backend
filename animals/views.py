@@ -1,12 +1,16 @@
+from django.contrib.auth import get_user_model
 from rest_framework import viewsets, permissions
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.views import APIView
 import cloudinary.uploader
 
 from .models import Animal
 from .serializers import AnimalSerializer
 from .permissions import IsOwnerOrReadOnly
-from rest_framework.decorators import action
-from rest_framework.response import Response
+
+User = get_user_model()
 
 
 class AnimalViewSet(viewsets.ModelViewSet):
@@ -101,3 +105,18 @@ class AnimalViewSet(viewsets.ModelViewSet):
             animal.image_url = result["secure_url"]
             animal.image_public_id = result["public_id"]
             animal.save(update_fields=["image_url", "image_public_id"])
+
+
+class CurrentUserView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+
+        return Response(
+            {
+                "id": user.id,
+                "username": user.username,
+                "email": user.email,
+            }
+        )

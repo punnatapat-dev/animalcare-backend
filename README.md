@@ -108,6 +108,12 @@ CLOUDINARY_API_SECRET=...
 
 ## 📜 Update-Historie & Projektfortschritt
 
+### ✅ 24.03.2026 – Current User Endpoint hinzugefügt
+
+- Neuer Endpoint `/api/users/me/` implementiert
+- Gibt Informationen des aktuell eingeloggten Benutzers zurück
+- Zugriff nur für authentifizierte Benutzer erlaubt
+
 ### ✅ 23.03.2026 – Endpoint für eigene Tiere hinzugefügt
 
 - Neuer Endpoint `/api/animals/my/` implementiert
