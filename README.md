@@ -108,6 +108,17 @@ CLOUDINARY_API_SECRET=...
 
 ## 📜 Update-Historie & Projektfortschritt
 
+### ✅ 25.03.2026 – Current User Endpoint & Rollen-Unterstützung
+
+- Neuer Endpoint `/api/users/me/` hinzugefügt
+- Endpoint liefert Informationen über den aktuell eingeloggten Benutzer
+- Rückgabe enthält jetzt:
+  - id
+  - username
+  - email
+  - is_staff
+  - is_superuser
+
 ### ✅ 24.03.2026 – Current User Endpoint hinzugefügt
 
 - Neuer Endpoint `/api/users/me/` implementiert
